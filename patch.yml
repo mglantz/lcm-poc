@@ -2,11 +2,15 @@
 - name: Patch system and reboot it afterwards
   hosts: all
   tasks:
-  - name: Mock version of patching the system
-    debug:
-      msg: System has been patched
+  - name: Upgrade all packages to latest version
+    package:
+      name: '*'
+      state: latest
+    register: system_update_status
       
-  - name: Mock version of rebooting the system
-    debug:
-      msg: System has been successfully rebooted      
+    - name: Reboot system and wait 3600 seconds for it to come up
+      reboot:
+        reboot_timeout: 3600
+        test_command: uptime
+      when: system_update_status is changed
       
