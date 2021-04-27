@@ -1,13 +1,14 @@
 - name: Run prerequisite checks for patching a system
   hosts: all
   gather_facts: yes
-
+  vars:
+    memory_free_required: 60000
   tasks:
     - name: Check memory utilization
       assert:
         that:
-          - ansible_memory_mb.real.free > 60000
-        msg: "Less than 1000 MB of free memory."
+          - ansible_memory_mb.real.free > memory_free_required
+        msg: "System has less than {{ memory_free_required }} MB of free memory: {{ ansible_memory_mb.real.free }}"
 
     - name: "Ensure that free space on {{ mountname }} is greater than 20%"
       assert:
