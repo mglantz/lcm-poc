@@ -1,0 +1,18 @@
+- name: Run prerequisite checks for patching a system
+  hosts: all
+  gather_facts: yes
+
+  tasks:
+    - name: Check memory utilization
+      assert:
+        that:
+          - ansible_memory_mb.real.free > 1000
+        msg: "Less than 1000 MB of free memory."
+
+    - name: "Ensure that free space on {{ mountname }} is greater than 20%"
+      assert:
+        that:
+          - item.size_available > item.size_total|float * 0.2
+        msg: "Disk space has reached 80% threshold"
+      when: item.mount == "/"
+      with_items: "{{ ansible_mounts }}"
