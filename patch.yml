@@ -1,6 +1,7 @@
 ---
 - name: Patch system and reboot it afterwards
   hosts: all
+  become: yes
   tasks:
   - name: Upgrade all packages to latest version
     package:
