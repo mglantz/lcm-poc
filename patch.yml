@@ -9,9 +9,9 @@
       state: latest
     register: system_update_status
       
-    - name: Reboot system and wait 3600 seconds for it to come up
-      reboot:
-        reboot_timeout: 3600
-        test_command: uptime
-      when: system_update_status is changed
+  - name: Reboot system and wait 3600 seconds for it to come up
+    reboot:
+      reboot_timeout: 3600
+      test_command: uptime
+    when: system_update_status is changed
       
