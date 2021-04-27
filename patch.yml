@@ -1,0 +1,12 @@
+---
+- name: Patch system and reboot it afterwards
+  hosts: all
+  tasks:
+  - name: Mock version of patching the system
+    debug:
+      msg: System has been patched
+      
+  - name: Mock version of rebooting the system
+    debug:
+      msg: System has been successfully rebooted      
+      
