@@ -6,7 +6,7 @@
     - name: Check memory utilization
       assert:
         that:
-          - ansible_memory_mb.real.free > 1000
+          - ansible_memory_mb.real.free > 20000
         msg: "Less than 1000 MB of free memory."
 
     - name: "Ensure that free space on {{ mountname }} is greater than 20%"
