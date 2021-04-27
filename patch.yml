@@ -1,5 +1,5 @@
 ---
-- name: Patch system and reboot it afterwards
+- name: Patch system and reboot it if software was updated
   hosts: all
   become: yes
   tasks:
@@ -9,7 +9,7 @@
       state: latest
     register: system_update_status
       
-  - name: Reboot system and wait 3600 seconds for it to come up
+  - name: Reboot system if software where updated
     reboot:
       reboot_timeout: 3600
       test_command: uptime
