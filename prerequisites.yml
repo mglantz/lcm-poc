@@ -2,7 +2,7 @@
   hosts: all
   gather_facts: yes
   vars:
-    memory_free_required: 60000
+    memory_free_required: 1000
   tasks:
     - name: Check memory utilization
       assert:
